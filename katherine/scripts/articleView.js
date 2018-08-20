@@ -100,10 +100,14 @@ articleView.create = () => {
 
   // TODO: Instantiate an article based on what's in the form fields:
   article.title = $('#title').val();
+  article.body = $('#body').val();
   article.author = $('#author').val();
   article.authorUrl = $('#authorUrl').val();
   article.category = $('#category').val();
-  article.body = $('#body').val();
+  article.publishedOn = $('#publishedOn').val();
+
+  article.daysAgo = parseInt((new Date() - new Date(article.publishedOn))/60/60/24/1000);
+  article.publishStatus = article.publishedOn ? `published ${article.daysAgo} days ago` : '(draft)';
 
   let post = new Article(article);
 
